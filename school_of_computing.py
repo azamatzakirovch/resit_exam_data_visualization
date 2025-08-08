@@ -63,3 +63,33 @@ def school_of_computing():
 
             <div class="rectangle"></div>
         """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <style>
+            .rectangle-1 {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                height: 300px;
+                width: 100%;
+                border: 1px solid black;
+            }
+        </style>
+
+        <div class="rectangle-1"></div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <style>
+            .rectangle-2 {
+                position: absolute;
+                top: 300px;
+                left: 0px;
+                height: 20px;
+                width: 100%;
+                # border: 1px solid black;
+            }
+        </style>
+
+        <div class="rectangle-2"></div>
+    """, unsafe_allow_html=True)
