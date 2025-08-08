@@ -23,7 +23,6 @@ with st.sidebar:
             "School of Engineering",
             "School of Humanities, Natural & Social Sciences",
             "School of Management",
-            "Summary",
         ],
         icons=[
             "house",
@@ -52,5 +51,3 @@ if options == "School of Humanities, Natural & Social Sciences":
 if options == "School of Management":
     school_of_management()
 
-if options == "Summary":
-    summary()

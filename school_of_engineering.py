@@ -3,38 +3,36 @@ def school_of_engineering():
     import plotly.express as px
     import methods
 
-    department_m, education_program_m, exam_day_m = st.columns([3, 4, 2])
+    col_department, col_program, col_day = st.columns([3, 4, 2])
 
-    with department_m:
-        departments = st.selectbox(
+    with col_department:
+        selected_department = st.selectbox(
             "Departments of New Uzbekistan University",
             ["School of Engineering"]
         )
 
-    with education_program_m:
-        default_data_m = methods.get_education_programs(departments)
-        edu_programs = st.multiselect(
+    with col_program:
+        available_programs = methods.get_education_programs(selected_department)
+        selected_programs = st.multiselect(
             "Education Programs of Department",
-            default_data_m,
-            default=default_data_m[:1]
+            available_programs,
+            default=available_programs[:1]
         )
 
-    with exam_day_m:
-        week_day = st.selectbox("Exam Days", ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"])
+    with col_day:
+        selected_day = st.selectbox("Exam Days", ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"])
 
-    dictionary_of_exam_session = methods.return_the_number_of_students_in_exam_session(week_day, edu_programs)
+    exam_data = methods.return_the_number_of_students_in_exam_session(selected_day, selected_programs)
 
-    barchart, explanation = st.columns([7, 3])
+    col_chart, col_info = st.columns([7, 3])
 
-    with barchart:
-        df_reset = dictionary_of_exam_session.reset_index().rename(columns={"index": "Session"})
-        df_melted = df_reset.melt(id_vars="Session", var_name="Program", value_name="Students")
+    with col_chart:
+        df_sessions = exam_data.reset_index().rename(columns={"index": "Session"})
+        df_long = df_sessions.melt(id_vars="Session", var_name="Program", value_name="Students")
 
-        sessions = df_melted["Session"].unique().tolist()
+        session_list = df_long["Session"].unique().tolist()
+        filtered_df = df_long[df_long["Session"].isin(session_list)]
 
-        filtered_df = df_melted[df_melted["Session"].isin(sessions)]
-
-        # Bar chart
         fig = px.bar(
             filtered_df,
             x="Session",
@@ -48,7 +46,7 @@ def school_of_engineering():
 
         st.plotly_chart(fig, use_container_width=True)
 
-    with explanation:
+    with col_info:
         st.markdown("""
             <style>
                 .rectangle {
@@ -60,7 +58,6 @@ def school_of_engineering():
                     border: 1px solid black;
                 }
             </style>
-
             <div class="rectangle"></div>
         """, unsafe_allow_html=True)
 
@@ -75,7 +72,6 @@ def school_of_engineering():
                 border: 1px solid black;
             }
         </style>
-
         <div class="rectangle-1"></div>
     """, unsafe_allow_html=True)
 
@@ -90,6 +86,5 @@ def school_of_engineering():
                 # border: 1px solid black;
             }
         </style>
-
         <div class="rectangle-2"></div>
     """, unsafe_allow_html=True)
