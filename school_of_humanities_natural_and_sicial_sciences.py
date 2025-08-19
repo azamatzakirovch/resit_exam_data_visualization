@@ -276,4 +276,3 @@ def school_of_humanities_natural_and_social_sciences():
                             Together, the three charts give a multi-layered perspective: the first highlights session participation patterns, the second addresses gender balance in resits, and the third reflects the overall academic composition of the student body.
                         </div>
                         """, unsafe_allow_html=True)
-

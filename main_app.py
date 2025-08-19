@@ -6,7 +6,6 @@ from school_of_computing import school_of_computing
 from school_of_engineering import school_of_engineering
 from school_of_humanities_natural_and_sicial_sciences import school_of_humanities_natural_and_social_sciences
 from school_of_management import school_of_management
-from summary import summary
 
 st.set_page_config(
     page_title="New Uzbekistan University Resit Exam",
@@ -50,4 +49,3 @@ if options == "School of Humanities, Natural & Social Sciences":
 
 if options == "School of Management":
     school_of_management()
-
